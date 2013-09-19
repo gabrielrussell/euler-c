@@ -1,4 +1,9 @@
-all: 1 2 3 4
+TARGETS = 1 2 3 4
 
-%: %.c
-	gcc -Wall -Werror -o $@ -lm $<
+all: $(TARGETS)
+
+clean:
+	rm $(TARGETS)
+
+%: %.c ht.c
+	gcc -Wall -Werror -o $@ -lm $^
