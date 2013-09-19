@@ -2,6 +2,8 @@
 #include <string.h>
 #include <error.h>
 
+#include "euler.h"
+
 int is_palindrome(char * s) {
 	int l = strlen(s);
 	int i;
@@ -37,6 +39,6 @@ int main (int argc, char ** argv) {
 			}
 		}
 	}
-	printf("%d\n",largest);
+	checkanswer(largest,906609);
 	return(0);
 }

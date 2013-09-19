@@ -66,6 +66,7 @@ void ht_insert( ht_t * ht, void * key, int key_length, void * value, int value_l
 
 int ht_fetch( ht_t * ht, void * key, int key_length, void ** value, int * value_length ) {
     uint32_t hash = mdjb_hash( key, key_length );
+    if (!ht->size) return(0);
     int hunt =  hash % ht->size ;
     while ( ht->table[hunt] != NULL ) {
         if (ht->table[hunt]->hash == hash && ht->table[hunt]->key_length == key_length && memcmp(ht->table[hunt]->key,key,key_length) == 0 ) {

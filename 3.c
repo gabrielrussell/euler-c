@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include "euler.h"
 
 int main(int argc, char ** argv) {
 	unsigned long n = 600851475143;
@@ -11,6 +12,6 @@ int main(int argc, char ** argv) {
 			sn = sqrt(n);
 		}
 	}
-	printf("%ld\n",n);
+        checkanswer(n,6857);
 	return(0);
 }

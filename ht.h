@@ -1,4 +1,8 @@
 #include <stdint.h>
+
+#ifndef HT_H
+#define HT_H
+
 typedef struct ht_entry {
     uint32_t hash;
     char * key;
@@ -18,3 +22,5 @@ void ht_insert( ht_t * ht, void * key, int key_length, void * value, int value_l
 int ht_fetch( ht_t * ht, void * key, int key_length, void ** value, int * value_length ) ;
 void ht_destroy(ht_t * ht) ;
 ht_t * ht_new(void);
+
+#endif

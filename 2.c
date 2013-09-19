@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "euler.h"
 
 void init_fib_state(int state[2]) ;
 int fib (int state[2]) ;
@@ -13,7 +14,7 @@ int main(int argc, char ** argv) {
 	while ((i=fib(fib_state))<4000000) {	
 		if (i%2 == 0) sum+=i;
 	}
-	printf("%d\n",sum);
+        checkanswer(sum,4613732);
 	return(0);
 }
 
