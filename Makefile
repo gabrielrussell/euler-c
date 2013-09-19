@@ -1,4 +1,4 @@
-TARGETS = 1 2 3 4 5
+TARGETS = 1 2 3 4 5 6
 EXTRA_TARGETS = ht_test
 
 all: $(TARGETS) $(EXTRA_TARGETS)
