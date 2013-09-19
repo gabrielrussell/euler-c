@@ -1,10 +1,9 @@
 #include <stdint.h>
-
 typedef struct ht_entry {
     uint32_t hash;
-    uint8_t * key;
+    char * key;
     int key_length;
-    uint8_t * value;
+    char * value;
     int value_length;
 } ht_entry_t;
 
@@ -15,4 +14,7 @@ typedef struct ht {
     int free;
 } ht_t;
 
-void ht_insert( ht_t * ht, uint8_t * key, int key_length, uint8_t * value, int value_length ) ;
+void ht_insert( ht_t * ht, void * key, int key_length, void * value, int value_length ) ;
+int ht_fetch( ht_t * ht, void * key, int key_length, void ** value, int * value_length ) ;
+void ht_destroy(ht_t * ht) ;
+ht_t * ht_new(void);

@@ -8,26 +8,28 @@
 void ht_insert_entry( ht_t * ht, ht_entry_t * e ) ;
 void ht_grow(ht_t * ht) ;
 
-uint32_t mdjb_hash ( uint8_t * key, int l ) {
+uint32_t mdjb_hash ( char * key, int l ) {
     uint32_t h = 0;
     /* modified Bernstein hash */
     while ( --l >= 0 ) h = 33 * h ^ key[l];
     return h;
 }
 
-ht_entry_t * ht_make_entry( uint8_t * key, int key_length, uint8_t * value, int value_length ) {
+ht_entry_t * ht_make_entry( char * key, int key_length, char * value, int value_length ) {
 
-    ht_entry_t * e = malloc( sizeof(ht_entry_t) + key_length + 1 + value_length + 1 );
-    if ( e == NULL ) error(1,errno,"failure to malloc ht_entry_t");
+    ht_entry_t * e = calloc( 1, sizeof(ht_entry_t) + key_length + 1 + value_length + 1 );
+    if ( e == NULL ) error(1,errno,"failure to calloc  ht_entry_t");
 
     e->hash = mdjb_hash( key, key_length );
 
-    e->key = (uint8_t *) e + sizeof(ht_entry_t);
+    e->key = (char *) e + sizeof(ht_entry_t);
     e->key_length = key_length;
     memcpy(e->key, key, key_length);
-    e->value = (uint8_t *) e + sizeof(ht_entry_t) + key_length + 1;
+    e->key[key_length] = 0;
+    e->value = (char *) e + sizeof(ht_entry_t) + key_length + 1;
     e->value_length = value_length;
     memcpy(e->value, value, value_length);
+    e->value[value_length] = 0;
 
     return e;
 }
@@ -35,7 +37,7 @@ ht_entry_t * ht_make_entry( uint8_t * key, int key_length, uint8_t * value, int 
 void ht_grow(ht_t * ht) {
     ht_t ht_orig = *ht;
     ht->size = ht->size ? ht->size * 2 : 32;
-    ht->table = malloc( sizeof(ht_entry_t *) * ht->size );
+    ht->table = calloc( 1, sizeof(ht_entry_t *) * ht->size );
     ht->num = 0;
     ht->free = ht->size / 2;
 
@@ -57,7 +59,37 @@ void ht_insert_entry( ht_t * ht, ht_entry_t * e ) {
     ht->num ++;
 }
 
-void ht_insert( ht_t * ht, uint8_t * key, int key_length, uint8_t * value, int value_length ) {
+void ht_insert( ht_t * ht, void * key, int key_length, void * value, int value_length ) {
     ht_entry_t * e = ht_make_entry( key, key_length, value, value_length ) ;
     ht_insert_entry( ht, e );
+}
+
+int ht_fetch( ht_t * ht, void * key, int key_length, void ** value, int * value_length ) {
+    uint32_t hash = mdjb_hash( key, key_length );
+    int hunt =  hash % ht->size ;
+    while ( ht->table[hunt] != NULL ) {
+        if (ht->table[hunt]->hash == hash && ht->table[hunt]->key_length == key_length && memcmp(ht->table[hunt]->key,key,key_length) == 0 ) {
+            *value = ht->table[hunt]->value;
+            *value_length = ht->table[hunt]->value_length;
+            return(1);
+        }
+        hunt = ( hunt + 1 ) % ht->size;
+    }
+    return(0);
+}
+
+void ht_destroy(ht_t * ht) {
+    int i;
+    for ( i = 0; i < ht->size ; i++ ) {
+        if (ht->table[i]) {
+            free(ht->table[i]);
+            ht->table[i]=0;
+        }
+    }
+    free(ht->table);
+    free(ht);
+}
+
+ht_t * ht_new(void) {
+    return(calloc(1,sizeof(ht_t)));
 }
