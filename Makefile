@@ -1,9 +1,13 @@
-TARGETS = 1 2 3 4 5 ht_test
+TARGETS = 1 2 3 4 5
+EXTRA_TARGETS = ht_test
 
-all: $(TARGETS)
+all: $(TARGETS) $(EXTRA_TARGETS)
 
 clean:
-	rm $(TARGETS)
+	rm $(TARGETS) $(EXTRA_TARGETS)
 
-%: %.c ht.c factor.c
+%: %.c ht.c factor.c euler.h
 	gcc -Wall -Werror -ggdb -o $@ -lm $^
+
+test: $(TARGETS)
+	for i in $(TARGETS); do ./$$i ; done

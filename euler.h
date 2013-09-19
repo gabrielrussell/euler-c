@@ -1,3 +1,4 @@
 #include <stdint.h>
+#include <error.h>
 
-#define checkanswer(a,b) if(a==b) { printf("%s [ok]\n",argv[0]); } else { printf("%s [not ok]\n",argv[0]); }
+#define checkanswer(a,b) if(a==b) { error(0,0,"[ok]"); } else { error(1,0,"[not ok]"); }
