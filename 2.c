@@ -14,6 +14,7 @@ int main(int argc, char ** argv) {
 		if (i%2 == 0) sum+=i;
 	}
 	printf("%d\n",sum);
+	return(0);
 }
 
 int fib (int state[2]) {

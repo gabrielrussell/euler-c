@@ -11,6 +11,6 @@ int main(int argc, char ** argv) {
 			sn = sqrt(n);
 		}
 	}
-	printf("%d\n",n);
+	printf("%ld\n",n);
 	return(0);
 }
