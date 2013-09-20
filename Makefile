@@ -1,4 +1,4 @@
-TARGETS = 1 2 3 4 5 6 7 8
+TARGETS = 1 2 3 4 5 6 7 8 9
 EXTRA_TARGETS = ht_test dar_test
 
 OBJECTS = ht.o factor.o dar.o
