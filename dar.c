@@ -3,9 +3,14 @@
 
 #include "dar.h"
 
+#include <stdio.h>
 void dar_ready(dar_t * a, int more) {
 	if (more > a->element_space) {
-		a->data = realloc(a->data, ( a->element_space + more ) * a->element_size ); 
+                int total = a->element_space + a->element_count;
+                if ( more < total / 2 ) more = total / 2;
+                more = ( more | 0x00FFFF ) + 1;
+                a->data_size += more * a->element_size ;
+		a->data = realloc(a->data, a->data_size ); 
 		a->element_space += more;
 	}
 }
@@ -13,6 +18,7 @@ void dar_ready(dar_t * a, int more) {
 dar_t * dar_new(int element_size, int initial_size) {
 	dar_t * a;
 	a = calloc(1,sizeof(*a));
+        initial_size = ( initial_size | 0x00FFFF ) + 1;
 	a->data_size = element_size * initial_size;
 	a->element_size = element_size;
 	a->element_count = 0;
