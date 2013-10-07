@@ -7,7 +7,7 @@ int fib (int state[2]) ;
 int main(int argc, char ** argv) {
 	int fib_state[2];
 	int i = 0;
-	int sum;
+	int sum = 0;
 
 	init_fib_state(fib_state);
 	
