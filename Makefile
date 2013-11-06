@@ -1,15 +1,16 @@
 TARGETS = 1 2 3 4 5 6 7 8 9 10 11 12
-EXTRA_TARGETS = ht_test dar_test
+EXTRA_TARGETS = ht_test dar_test bn_test
+DEPENCENCIES = euler.h
 
-OBJECTS = ht.o factor.o dar.o primes.o
+OBJECTS = ht.o factor.o dar.o primes.o bn.o
 
 all: $(TARGETS) $(EXTRA_TARGETS)
 
-$(OBJECTS): %.o: %.c
-	gcc -Wall -Werror -ggdb -O3 -c -o $@ -lm $^
+$(OBJECTS): %.o: %.c $(DEPENCENCIES)
+	gcc -Wall -Werror -ggdb -O0 -c -o $@ -lm $<
 
 %: %.c $(OBJECTS)
-	gcc -Wall -Werror -ggdb -O3 -o $@ -lm -lprofiler $^
+	gcc -Wall -Werror -ggdb -O0 -o $@ -lm -lprofiler $^
 
 test: $(TARGETS)
 	for i in $(TARGETS); do ./$$i ; done

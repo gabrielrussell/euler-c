@@ -14,7 +14,7 @@ void next_prime(uint64_t *n,dar_t *primes) {
             is_prime = 1;
             uint64_t nsqr = sqrt(*n);
             for ( i=0; i < primes->element_count; i++) {
-                dar_fetch(primes,i,(void **)&p);
+                p = dar_fetch(primes,i);
                 if ( *p > nsqr ) break;
                 if ( ( *n % *p ) == 0 ) {
                     is_prime = 0;
