@@ -31,4 +31,6 @@ uint64_t bn_to_uint64(bn_t * n) ;
 bn_t * bn_from_uint32(uint32_t i) ;
 
 bn_t * bn_from_uint64(uint64_t i) ;
+
+void bn_offset_iadd( bn_t * r,uint32_t i, int offset) ;
 #endif

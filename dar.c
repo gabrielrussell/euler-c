@@ -40,22 +40,28 @@ void dar_init(dar_t * a, int element_size, int initial_size) {
 
 void dar_push(dar_t * a, void * e) {
 	dar_ready(a,1);
-	memcpy(a->data+(a->element_count * a->element_size),e,a->element_size);
+	dar_store(a,e,a->element_count);
 	a->element_count++;
 	a->element_space--;
 }
 
 int dar_pop(dar_t * a,void *e ) {
-        if (!a->element_count) return(0);
-	memcpy(e, a->data + ( ( a->element_count - 1 ) * a->element_size), a->element_size);
+        if ( ! a->element_count ) return(0);
+	int r = dar_fetch(a,e,a->element_count - 1 );
+        if (!r) return(0);
 	a->element_count--;
 	a->element_space++;
         return(1);
 }
 
-void * dar_fetch(dar_t * a, int i) {
-    // XXX bounds check
-    return ((char *)a->data) + (i * a->element_size);
+int dar_fetch(dar_t * a, void * e, int i) {
+    if ( i > a->element_count - 1 ) return(0);
+    memcpy(e, a->data + ( i * a->element_size), a->element_size);
+    return(1);
+}
+
+void dar_store(dar_t * a, void * e, int i) {
+    memcpy(a->data + ( i * a->element_size), e, a->element_size);
 }
 
 dar_t * dar_copy(dar_t * a) {
