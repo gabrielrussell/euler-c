@@ -12,7 +12,7 @@ bn_t * bn_new(void) ;
 
 bn_t * bn_scan(char *string, int len) ;
 
-void bn_imulti(bn_t * n, long i) ;
+bn_t * bn_imulti(bn_t * n, int i) ;
 
 bn_t * bn_multi(bn_t * n, bn_t * m) ;
 

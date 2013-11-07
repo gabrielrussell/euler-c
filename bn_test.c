@@ -41,9 +41,56 @@ int main( int argc, char ** argv ) {
     checkanswer( bn_to_uint64(n),4294967295);
     bn_offset_iadd(n,1,0);
     checkanswer( bn_to_uint64(n),4294967296);
+    bn_destroy(n);
 
+    n = bn_new();
+    bn_shift_iadd(n,0x000000FF,0);
+    checkanswer(bn_to_uint32(n),0x000000FF);
+    bn_destroy(n);
+
+    n = bn_from_uint32(0x000000FF);
     bn_zero(n);
     checkanswer( bn_to_uint64(n),0);
+    bn_destroy(n);
+
+    n = bn_from_uint32(0x000000FF);
+    m = bn_new();
+    bn_shift_add(n,m,0);
+    checkanswer(bn_to_uint32(n),0x000000FF);
+    bn_destroy(n);
+    bn_destroy(m);
+
+    n = bn_new();
+    m = bn_from_uint32(0x000000FF);
+    bn_shift_add(n,m,0);
+    checkanswer(bn_to_uint32(n),0x000000FF);
+    bn_destroy(n);
+    bn_destroy(m);
+
+    n = bn_new();
+    m = bn_from_uint32(0x000000FF);
+    bn_shift_add(n,m,0);
+    checkanswer(bn_to_uint32(n),0x000000FF);
+    bn_destroy(n);
+    bn_destroy(m);
+
+    n = bn_from_uint32(0x000000FF);
+    m = bn_from_uint32(0x0000FF00);
+    bn_shift_add(n,m,0);
+    checkanswer(bn_to_uint32(n),0x0000FFFF);
+    bn_destroy(n);
+    bn_destroy(m);
+
+    n = bn_from_uint32(0x000000FF);
+    m = bn_from_uint32(0x000000FF);
+    bn_shift_add(n,m,8);
+    checkanswer(bn_to_uint32(n),0x0000FFFF);
+    bn_destroy(n);
+    bn_destroy(m);
+
+    n = bn_scan("123",3);
+    checkanswer(bn_to_uint32(n),123);
+    bn_destroy(n);
 
     return(0);
 }
