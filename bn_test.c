@@ -42,5 +42,8 @@ int main( int argc, char ** argv ) {
     bn_offset_iadd(n,1,0);
     checkanswer( bn_to_uint64(n),4294967296);
 
+    bn_zero(n);
+    checkanswer( bn_to_uint64(n),0);
+
     return(0);
 }

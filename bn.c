@@ -58,6 +58,10 @@ void bn_shift_add( bn_t * r, bn_t * n, int offset) {
 //    }
 }
 
+bn_t * bn_multi(bn_t * n, bn_t * m) {
+    return NULL;
+}
+
 void bn_imulti(bn_t * n, long i) {
     int j = 0;
     bn_t * r = bn_new();
@@ -111,4 +115,8 @@ bn_t * bn_from_uint64(uint64_t i) {
     part = i >> 32;
     dar_push(n->dar,&part);
     return n;
+}
+
+void bn_zero(bn_t * n) {
+    n->dar->element_count = 0;
 }

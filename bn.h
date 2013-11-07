@@ -14,6 +14,8 @@ bn_t * bn_scan(char *string, int len) ;
 
 void bn_imulti(bn_t * n, long i) ;
 
+bn_t * bn_multi(bn_t * n, bn_t * m) ;
+
 void bn_shift_iadd(bn_t * r,uint64_t i, int offset) ;
 
 void bn_shift_add(bn_t * r, bn_t * n, int offset) ;
@@ -33,4 +35,7 @@ bn_t * bn_from_uint32(uint32_t i) ;
 bn_t * bn_from_uint64(uint64_t i) ;
 
 void bn_offset_iadd( bn_t * r,uint32_t i, int offset) ;
+
+void bn_zero(bn_t * n) ;
+
 #endif
