@@ -39,7 +39,7 @@ int main( int argc, char ** argv ) {
 
     n = bn_from_uint32(4294967295);
     checkanswer( bn_to_uint64(n),4294967295);
-    bn_offset_iadd(n,1,0);
+    bn_shift_iadd(n,1,0);
     checkanswer( bn_to_uint64(n),4294967296);
     bn_destroy(n);
 

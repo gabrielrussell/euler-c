@@ -16,7 +16,7 @@ bn_t * bn_imulti(bn_t * n, int i) ;
 
 bn_t * bn_multi(bn_t * n, bn_t * m) ;
 
-void bn_shift_iadd(bn_t * r,uint64_t i, int offset) ;
+void bn_shift_iadd(bn_t * r,uint32_t i, int offset) ;
 
 void bn_shift_add(bn_t * r, bn_t * n, int offset) ;
 

@@ -20,37 +20,38 @@ bn_t * bn_scan(char *string, int len) {
     bn_t * q;
     for (i=0;i<len;i++) {
         q = bn_imulti(r,10);
-        bn_offset_iadd(q,string[i]-'0',0);
+        bn_shift_iadd(q,string[i]-'0',0);
         bn_destroy(r);
         r = q;
     }
     return(r);
 }
 
-void bn_shift_iadd( bn_t * r,uint64_t i, int shift) {
+void bn_shift_iadd( bn_t * r,uint32_t i, int shift) {
     int word_offset = shift / 32;
     int bit_offset = shift % 32;
-    int small_part = i << bit_offset;
-    int large_part = i >> ( 32 - bit_offset );
-    bn_offset_iadd(r,small_part,word_offset);
-    bn_offset_iadd(r,large_part,word_offset+1);
-}
 
-void bn_offset_iadd( bn_t * r,uint32_t i, int offset) {
-    uint32_t zero = 0;
-    uint32_t w; // word
-    int overflow = 0;
-    int o = offset;
-    do {
-        /* first extend the number left-wise to accommodate the new data */
-        while ( r->dar->element_count < o + 1 ) dar_push(r->dar, &zero );
-        (void)dar_fetch(r->dar,&w,o);
-        overflow = (w + i < w);
-        w += i;
-        dar_store(r->dar,&w,o);
-        i = overflow;
-        o++;
-    } while (i);
+    if (bit_offset) {
+        int small_part = i << bit_offset;
+        int large_part = i >> ( 32 - bit_offset );
+        bn_shift_iadd(r,small_part,word_offset * 32);
+        bn_shift_iadd(r,large_part,( word_offset+1 ) * 32);
+    } else {
+        uint32_t zero = 0;
+        uint32_t w; // word
+        int overflow = 0;
+        int o = word_offset;
+        do {
+            /* first extend the number left-wise to accommodate the new data */
+            while ( r->dar->element_count < o + 1 ) dar_push(r->dar, &zero );
+            (void)dar_fetch(r->dar,&w,o);
+            overflow = (w + i < w);
+            w += i;
+            dar_store(r->dar,&w,o);
+            i = overflow;
+            o++;
+        } while (i);
+    }
 }
 
 void bn_shift_add( bn_t * r, bn_t * n, int offset) {
