@@ -1,15 +1,24 @@
 #include <stdint.h>
+#include <stdio.h>
+#include <inttypes.h>
 
 uint64_t isqrt( uint64_t n ) {
-    uint64_t bit;
-    uint64_t r = 0;
-    bit = 1ULL << 32;
-    while (bit>n) bit >>= 1; //skip past bits that we know can't be in the answer
+    uint64_t r = 0; // result
+    uint64_t s = 0; // squared result
+    uint64_t ns; // potential new s
+    uint64_t p; // bit position
+    p = 32;
+    while ( (1UL << p) > n ) p--;
 
-    while (bit) {
-        if ( (r|bit) * (r|bit) <= n ) r |= bit; //set the bit if it doesn't make the answer too large
-        bit >>= 1;
-    }
+    do {
+        // (a+b)^2 = a^2 + 2ab + b^2
+        ns = s + ( r << ( p + 1 ) ) + ( 1UL << ( p + p ) ); 
+        if ( ns <= n ) {
+            s = ns;
+            r |= 1UL << p;
+        }
+    } while (p--);
+
     return r;
 }
 
