@@ -1,6 +1,6 @@
 #include <stdint.h>
-#include <math.h>
 #include <assert.h>
+#include "isqrt.h"
 #include "ht.h"
 
 /* hmm, maybe just make a ht_merge function that takes a pointer
@@ -41,7 +41,7 @@ ht_t * factor(uint64_t n) {
         if (pc) add_factor(f,small_primes[p],pc);
 
     }
-    uint64_t limit = sqrt(n);
+    uint64_t limit = isqrt(n);
     for ( i=31; i<=limit; i+=2) {
         pc = 0;
         while (n%i==0) {
@@ -49,7 +49,7 @@ ht_t * factor(uint64_t n) {
             pc++;
         }
         if (pc) add_factor(f,i,pc);
-        limit = sqrt((double)n);
+        limit = isqrt(n);
     }
     if (n>1) add_factor(f,n,1);
     return f;

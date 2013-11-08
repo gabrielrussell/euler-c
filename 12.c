@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include "euler.h"
-#include "math.h"
+#include "isqrt.h"
 
 uint64_t count_divisors(uint64_t n) {
-    uint64_t s = sqrt(n), i, d=0;
+    uint64_t s = isqrt(n), i, d=0;
     for (i=1;i<s;i++) if (n%i==0) d+=2;
     if (n%s==0) d++;
     return(d);
