@@ -1,4 +1,4 @@
-#include <stdint.h>
+include <stdint.h>
 #include <stdio.h>
 #include <inttypes.h>
 
@@ -11,7 +11,14 @@ uint64_t isqrt( uint64_t n ) {
     while ( (1UL << p) > n ) p--;
 
     do {
-        // (a+b)^2 = a^2 + 2ab + b^2
+        // to calculate (a+b)^2 when we have a , a^2 and b, when b=2^n
+        // without any multiplies
+        // 2^n = 1 << n
+        // (a+b)^2 = a^2 +  2ab        + b^2
+        //         = a^2 +  2*a*2^n    + 2^2n
+        //         = a^2 +  a*2^(n+1)  + 2^2n
+        //         = a^2 +  a*1<<(n+1) + 1<<2n
+        //         = a^2 +  a<<(n+1)   + 1<<(n+n)
         ns = s + ( r << ( p + 1 ) ) + ( 1UL << ( p + p ) ); 
         if ( ns <= n ) {
             s = ns;
