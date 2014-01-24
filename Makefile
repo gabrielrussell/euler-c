@@ -10,10 +10,10 @@ $(OBJECTS): %.o: %.c $(DEPENCENCIES)
 	gcc -Wall -Werror -ggdb -O0 -c -o $@ $<
 
 %: %.c $(OBJECTS)
-	gcc -Wall -Werror -ggdb -O0 -o $@ -lprofiler $^
+	gcc -Wall -Werror -ggdb -O0 -o $@ $^
 
-test: $(TARGETS)
-	for i in $(TARGETS); do ./$$i ; done
+test: $(TARGETS) $(EXTRA_TARGETS)
+	for i in $(TARGETS) $(EXTRA_TARGETS); do ./$$i ; done
 
 clean:
 	rm -f $(TARGETS) $(EXTRA_TARGETS) $(OBJECTS)

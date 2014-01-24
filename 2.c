@@ -14,7 +14,7 @@ int main(int argc, char ** argv) {
 	while ((i=fib(fib_state))<4000000) {	
 		if (i%2 == 0) sum+=i;
 	}
-        checkanswer(sum,4613732);
+        checkanswer(sum,4613732,"problem 2");
 	return(0);
 }
 

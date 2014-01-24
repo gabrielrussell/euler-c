@@ -7,11 +7,11 @@ int main(int argc, char ** argv) {
         for ( b = 2; b < a; b++ ) {
             c = 1000 - a - b;
             if ( a * a + b * b == c * c ) {
-                checkanswer( a * b * c, 31875000 );
+                checkanswer( a * b * c, 31875000,"problem 9" );
                 return(0);
             }
         }
     }
-    checkanswer( a * b * c, 31875000 );
+    checkanswer( a * b * c, 31875000, "problem 9" );
     return(1);
 }

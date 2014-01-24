@@ -5,6 +5,7 @@
 
 #include "ht.h"
 
+// XXX convert to checkanswer
 int main(int argc, char ** argv) {
     ht_t * ht = ht_new();
     char * value;

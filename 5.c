@@ -15,7 +15,7 @@ int main (int argc, char ** argv) {
         ht_destroy(f);
     }
     uint64_t n = defactor(r);
-    checkanswer(n,232792560);
+    checkanswer(n,232792560,"problem 5");
     return(0);
 }
 

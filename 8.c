@@ -32,6 +32,6 @@ int main(int argc, char ** argv) {
         for (k=0;k<5;k++) { p*=n[j+k]-'0'; }
         if (p>m) { m=p; }
     }
-    checkanswer(m,40824);
+    checkanswer(m,40824,"problem 8");
     return(0);
 }

@@ -1,5 +1,6 @@
 #include "euler.h"
 #include "bn.h"
+#include <unistd.h>
 
 char numbers[100][50] = {
     "37107287533902102798797998220837590246510135740250",
@@ -109,8 +110,12 @@ int main(int argc, char ** argv) {
     bn_t * m = bn_new();
     for (i = 0;i<100; i++) {
         bn_t * n = bn_scan(numbers[i],50);
-        bn_shift_add(m,n,0);
+        bn_add(m,n,0);
     }
+    dar_t * fmt = bn_format(m);
+    dar_trim(fmt,10);
+    bn_t * bn_answer = bn_scan_dar(fmt);
+    checkanswer(bn_to_uint64(bn_answer),5537376230,"problem 13");
     return(0);
 
 }

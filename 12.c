@@ -13,6 +13,6 @@ uint64_t count_divisors(uint64_t n) {
 int main(int argc, char** argv) {
     uint64_t n=0, t=0, d=0;
     while (d<500) d = count_divisors( (t += ++n) );
-    checkanswer(t,76576500);
+    checkanswer(t,76576500,"problem 12");
     return(0);
 }

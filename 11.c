@@ -53,6 +53,6 @@ int main(int argc, char ** argv) {
             }
         }
     }
-    checkanswer(m,70600674);
+    checkanswer(m,70600674,"problem 11");
     return(0);
 }

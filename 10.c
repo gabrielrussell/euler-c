@@ -12,6 +12,6 @@ int main (int argc, char ** argv) {
         i += n;
         next_prime(&n,p);
     } while ( n < 2000000 );
-    checkanswer(i,142913828922);
+    checkanswer(i,142913828922,"problem 10");
     return(0);
 }

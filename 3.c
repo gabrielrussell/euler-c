@@ -12,6 +12,6 @@ int main(int argc, char ** argv) {
 		    sn = isqrt( n );
 		}
 	}
-        checkanswer(n,6857);
+        checkanswer(n,6857,"problem 3");
 	return(0);
 }

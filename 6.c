@@ -10,6 +10,6 @@ int main(int argc, char ** argv) {
         b += i;
     }
     b = b*b;
-    checkanswer(b-a,25164150);
+    checkanswer(b-a,25164150,"problem 6");
     return(0);
 }

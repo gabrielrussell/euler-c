@@ -39,6 +39,6 @@ int main (int argc, char ** argv) {
 			}
 		}
 	}
-	checkanswer(largest,906609);
+	checkanswer(largest,906609,"problem 4");
 	return(0);
 }

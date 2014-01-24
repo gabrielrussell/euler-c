@@ -12,6 +12,6 @@ int main (int argc, char ** argv) {
     for (i = 1; i<=10001; i++) {
         next_prime(&n,p);
     }
-    checkanswer(n,104743);
+    checkanswer(n,104743,"problem 7");
     return(0);
 }
