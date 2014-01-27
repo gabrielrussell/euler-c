@@ -28,7 +28,7 @@ uint64_t counts_paths(uint64_t size) {
 }
 
 int main( int argc, char ** argv ) {
-    //checkanswer(counts_paths(2),6,"as given in the question, 2x2 grid has 6 routes");
+    quietly_checkanswer(counts_paths(2),6,"as given in the question, 2x2 grid has 6 routes");
     checkanswer(counts_paths(20),137846528820,"problem 15");
     return(0);
 }

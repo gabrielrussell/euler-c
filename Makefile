@@ -1,4 +1,4 @@
-TARGETS = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+TARGETS = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
 EXTRA_TARGETS = ht_test dar_test bn_test
 DEPENCENCIES = euler.h
 
