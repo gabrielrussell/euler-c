@@ -1,10 +1,12 @@
-TARGETS = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
-EXTRA_TARGETS = ht_test dar_test bn_test
+TARGETS = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
+EXTRA_TARGETS = ht_test dar_test bn_test split_test
 DEPENCENCIES = euler.h
 
-OBJECTS = ht.o factor.o dar.o primes.o bn.o isqrt.o
+OBJECTS = ht.o factor.o dar.o primes.o bn.o isqrt.o split.o itr.o
 
-all: $(TARGETS) $(EXTRA_TARGETS)
+all: $(TARGETS) $(EXTRA_TARGETS) ctags
+
+ctags:
 
 $(OBJECTS): %.o: %.c $(DEPENCENCIES)
 	gcc -Wall -Werror -ggdb -O0 -c -o $@ $<
