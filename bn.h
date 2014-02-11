@@ -52,4 +52,8 @@ dar_t * bn_format(bn_t * a) ;
 
 bn_t * bn_scan_dar(dar_t * d) ;
 
+uint64_t bn_sum_digits(bn_t * n) ;
+
+bn_t * bn_factorial( int n ) ;
+
 #endif

@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 
 #include "bn.h"
 #include "dar.h"
@@ -233,6 +234,12 @@ int main( int argc, char ** argv ) {
     m = bn_scan(nf->data,nf->element_count);
     //dar_t * mf = bn_format(m);
     checkanswer(bn_equal(n,m),1,"scan format scan round trip");
+
+    char * ohf = "93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000";
+    n = bn_scan(ohf,158);
+    nf = bn_format(n);
+    //printf("%s\n",(char *)nf->data);
+    checkanswer(memcmp(ohf,nf->data,158),0,"scan format of onehundred factorial equals imput string");
     
     return(0);
 }

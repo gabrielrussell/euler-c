@@ -21,16 +21,7 @@ int main( int argc, char ** argv ) {
     /* then answer the problem */
     n = bn_new();
     bn_iadd(n,1,1000);
-    s = bn_format(n);
-    int i; char j;
-    int sum = 0;
-    for ( i = 0; i < s->element_count; i++ ) {
-        dar_fetch(s,&j,i);
-        sum += ( j - '0' );
-    }
+    uint64_t sum = bn_sum_digits(n);
     checkanswer(sum,1366,"problem 16");
-
-    
-    
     return(0);
 }

@@ -275,3 +275,26 @@ dar_t * bn_format(bn_t * a) {
     dar_destroy( digits );
     return(rdigits);
 }
+
+uint64_t bn_sum_digits(bn_t * n) {
+    uint64_t r = 0;
+    dar_t * s = bn_format(n);
+    int i; char j;
+    for ( i = 0; i < s->element_count; i++ ) {
+        dar_fetch(s,&j,i);
+        r += ( j - '0' );
+    }
+    dar_destroy(s);
+    return r;
+}
+
+bn_t * bn_factorial( int n ) {
+    bn_t * r = bn_from_uint32(1);
+    do {
+        bn_t * partial = bn_new();
+        bn_imulti(partial,r,n);
+        bn_destroy(r);
+        r = partial;
+    } while ( --n );
+    return r;
+}
