@@ -1,7 +1,9 @@
 #include <stdint.h>
 #include <assert.h>
+#include <stddef.h>
 #include "isqrt.h"
 #include "ht.h"
+#include "dar.h"
 
 /* hmm, maybe just make a ht_merge function that takes a pointer
  * to a value merge function */
@@ -70,4 +72,28 @@ uint64_t defactor(ht_t * f) {
         for (j=0;j<m;j++) d*=n;
     }
     return(d);    
+}
+
+dar_t * divisors( uint64_t n ) { 
+    uint64_t sqrt = isqrt( n ) ;
+    int64_t i;
+    dar_t * r = dar_new(sizeof(uint64_t),8 );
+    dar_t * rtop = dar_new(sizeof(uint64_t),8 );
+    for ( i = 1; i<=sqrt; i++ ) {
+        if ( n % i == 0 ) {
+            uint64_t j = n / i;
+            dar_push(r,&i);
+            if (j!=i) dar_push(rtop,&j);
+        }
+    }
+    uint64_t k;
+    while ( dar_pop(rtop,&k) ) dar_push(r, &k );
+    dar_destroy(rtop);
+    return r;
+}
+
+dar_t * proper_divisors( uint64_t n ) {
+    dar_t * r = divisors( n );
+    (void)dar_pop( r, NULL );
+    return r;
 }

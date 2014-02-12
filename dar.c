@@ -66,8 +66,10 @@ void dar_push(dar_t * a, void * e) {
 
 int dar_pop(dar_t * a,void *e ) {
         if ( ! a->element_count ) return(0);
-	int r = dar_fetch(a,e,a->element_count - 1 );
-        if (!r) return(0);
+	if (e) {
+            if (!dar_fetch(a,e,a->element_count - 1 ))
+                return(0);
+        }
 	a->element_count--;
 	a->element_free++;
         return(1);
